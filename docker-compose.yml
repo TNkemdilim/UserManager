@@ -1,0 +1,32 @@
+version: "2"
+services:
+  web:
+    container_name: UserManager
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/base/app
+      - /base/app/node_modules
+    links:
+      - mongo
+    command: nodemon -L
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes_from:
+      - mongodata
+    ports:
+      - "27017:27017"
+
+  mongodata:
+    image: tianon/true
+    volumes:
+      - /base/app/data
+
+  adminmongo:
+    image: "mrvautin/adminmongo"
+    ports:
+     - "1234:1234"
