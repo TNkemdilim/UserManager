@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 services:
   web:
     container_name: UserManager
@@ -16,17 +16,16 @@ services:
   mongo:
     container_name: mongo
     image: mongo
-    volumes_from:
-      - mongodata
+    volumes:
+      - mongodata:/base/app/data
     ports:
       - "27017:27017"
-
-  mongodata:
-    image: tianon/true
-    volumes:
-      - /base/app/data
 
   adminmongo:
     image: "mrvautin/adminmongo"
     ports:
      - "1234:1234"
+
+volumes:
+  mongodata:
+    driver: local
