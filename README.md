@@ -5,6 +5,36 @@
 This repository contains a simple demo API built with NodeJS.
 The API is used to manage users in a MongoDB database.
 
+# Docker Deployment
+* Simply run ```docker-compose up``` to both BUILD and DEPLOY the docker container.
+
+* To build image again, run ```docker-compose up --build```.
+
+* To run docker in detached mode, simply add the ```-d``` to any of the above commands.
+
+### NOTE: **Code monitoring** is enabled BY DEFAULT using the ```codemon```  npm package. The essence of this, is to **automatically reflect code changes in live deployment**. 
+
+* To disable **code-monitoring**: Comment/remove the ```nodemon -L``` from the ***Usermanager container*** ```command``` configuration, which is located in your ```docker-compose.yml``` file.
+
+Current ``docker-compose.yml`` file, **higlighting code monitoring configuration** :
+```docker
+version: "2"
+services:
+  web:
+    container_name: UserManager
+    
+    ...
+
+    links:
+      - mongo
+    command: nodemon -L
+
+    ...
+```
+
+
+<br><br>
+
 ### Development
 This application was developed using [ExpressJS](http://expressjs.com/). MongoDB was used for persisting data with [Mongoose](https://mongoosejs.com/) as [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping).
 
