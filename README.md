@@ -5,35 +5,36 @@
 This repository contains a simple demo API built with NodeJS.
 The API is used to manage users in a MongoDB database.
 
-# Docker Deployment
+### Docker Deployment
 * Simply run ```docker-compose up``` to both BUILD and DEPLOY the docker container.
 
 * To build image again, run ```docker-compose up --build```.
 
 * To run docker in detached mode, simply add the ```-d``` to any of the above commands.
 
-### NOTE: **Code monitoring** is enabled BY DEFAULT using the ```codemon```  npm package. The essence of this, is to **automatically reflect code changes in live deployment**. 
+<br>
 
-* To disable **code-monitoring**: Comment/remove the ```nodemon -L``` from the ***Usermanager container*** ```command``` configuration, which is located in your ```docker-compose.yml``` file.
+### Source code monitoring on docker
+> **Code monitoring** is enabled by DEFAULT using the [``nodemon``](https://nodemon.io/) package. The essence of this, is to **automatically reflect code changes in live deployment**. This is only available as a ```devDependency```. Visit [nodemon](https://nodemon.io) for more details.
 
-Current ``docker-compose.yml`` file, **higlighting code monitoring configuration** :
+* To disable **code-monitoring**,  simply comment/remove the ```nodemon -L``` from the ```command``` configuration, which is located under the configuration for the container named **UserManager** in your ```docker-compose.yml``` file.
+
+* ``docker-compose.yml`` file, reflecting a **disabled code monitoring configuration** on docker:
 ```docker
-version: "2"
+version: "3"
 services:
   web:
-    container_name: UserManager
-    
+    container_name: UserManager    
     ...
 
     links:
       - mongo
-    command: nodemon -L
+    # command: nodemon -L 
 
     ...
 ```
 
-
-<br><br>
+<br>
 
 ### Development
 This application was developed using [ExpressJS](http://expressjs.com/). MongoDB was used for persisting data with [Mongoose](https://mongoosejs.com/) as [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping).
