@@ -1,7 +1,9 @@
 FROM mhart/alpine-node:9.3
 
-# Creates a more restricted user group on file system and 
-# Install nodemon package
+# Creates a more restricted user group on file system,
+# install nodemon package,
+# create directory for application code
+# all in parallel
 RUN addgroup -S nodeUser \
   && adduser -S -g nodeUser nodeUser \
   && npm install -g -D nodemon --no-optional \
